@@ -16,32 +16,38 @@ app.post("/sign-up", (req, res) => {
 app.post("/tweets", (req, res) => {
 
     /* if (usuário não estiver cadastrado = se username não estiver em [users]) = {
-        res.send({message: "UNAUTHORIZED"})
+        res.send("UNAUTHORIZED")
         return
     }*/
 
-    tweets.push({username: req.body.username, tweet: req.body.tweet})
+    /* tweets.push({username: req.body.username, tweet: req.body.tweet}) */
     res.send("Ok!")
 })
 
 app.get("/tweets", (req, res) => {
 
-    console.log(req)
+    const singleUser = users.find((user) => {user.username === username.tweets})
+
+    console.log()
 
     const tweet = {
-        username: "bobesponja",
-        avatar: "https://cdn.shopify.com/s/files/1/0150/0643/3380/files/Screen_Shot_2019-07-01_at_11.35.42_AM_370x230@2x.png",
-        tweet: "Eu amo hambúrguer de siri!"
+        username: users.username,
+        avatar: singleUser.avatar,
+        tweet: tweets.tweet
     }
+
+    tweets.push(tweet)
+
+    /* console.log(tweet) */
+
+    /* const tenLastTweets = tweets.slice(tweets.legth - 10, tweets.length)
 
     if (req.tenLastTweets === undefined) {
         res.send([])
         return
     }
 
-    const tenLastTweets = tweets.slice(tweets.legth - 10, tweets.length)
-    res.send(tenLastTweets)
-
+    res.send(tenLastTweets) */
 })
 
 const PORT = 5000
