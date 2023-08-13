@@ -33,7 +33,7 @@ app.post("/tweets", (req, res) => {
     return res.status(400).send("Todos os campos são obrigatórios!")
   }
 
-  if (tweet === "" || typeof(tweet) !== "string" || typeof(avatar) === undefined) {
+  if (tweet === "" || typeof(tweet) !== "string" || typeof(tweet) === undefined) {
     return res.status(400).send("Todos os campos são obrigatórios!")
   }
 
