@@ -29,7 +29,13 @@ app.post("/tweets", (req, res) => {
   const { tweet } = req.body
   const { user } = req.headers
 
-  if(!user || !tweet) return res.status(400).send("Preencha todos os campos!")
+  if (user === "" || typeof(username) !== "string" || typeof(user) === undefined) {
+    return res.status(400).send("Todos os campos são obrigatórios!")
+  }
+
+  if (tweet === "" || typeof(tweet) !== "string" || typeof(avatar) === undefined) {
+    return res.status(400).send("Todos os campos são obrigatórios!")
+  }
 
   const registeredUser = users.find(u => u.username === user)
         
