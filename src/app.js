@@ -26,15 +26,16 @@ app.post("/sign-up", (req, res) => {
 
 app.post("/tweets", (req, res) => {
 
-  const { username, tweet } = req.body
+  const { tweet } = req.body
+  const { user } = req.headers
 
-  if(!username || !tweet) return res.send("Preencha todos os campos!")
+  if(!user || !tweet) return res.send("Preencha todos os campos!")
 
-  const registeredUser = users.find(user => user.username === username)
+  const registeredUser = users.find(u => u.username === user)
         
   if (!registeredUser) return res.status(400).send("UNAUTHORIZED")
         
-  tweets.push({ username: username, tweet: tweet })
+  tweets.push({ username: user, tweet: tweet })
   res.status(201).send("Ok!")
 })
 
