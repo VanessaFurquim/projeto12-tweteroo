@@ -32,7 +32,7 @@ app.post("/tweets", (req, res) => {
 
   const registeredUser = users.find(user => user.username === username)
         
-  if (!registeredUser) return res.status(401).send("UNAUTHORIZED")
+  if (!registeredUser) return res.status(400).send("UNAUTHORIZED")
         
   tweets.push({ username: username, tweet: tweet })
   res.status(201).send("Ok!")
