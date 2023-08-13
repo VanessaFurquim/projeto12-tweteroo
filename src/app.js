@@ -62,5 +62,29 @@ app.get("/tweets", (req, res) => {
   res.send(newTweets)
 })
 
+app.get("/tweets/:username", (req, res) => {
+  const { username } = req.params
+  
+  const usersTweets = tweets.filter(t => t.username === username)
+
+  if (!usersTweets) {
+    return res.send([])
+  }
+
+  const usersAvatar = users.find(user => user.username === username)
+
+  for (let i = 0; i < usersTweets.length; i++) {
+    
+    usersTweets[i] = {
+      username: usersTweets[i].username,
+      avatar: usersAvatar.avatar,
+      tweet: usersTweets[i].tweet
+    }
+    
+  }
+  
+  res.send(usersTweets)
+})
+
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Server active on port ${PORT}.`))
