@@ -1,0 +1,61 @@
+app.get("/tweets", (req, res) => {
+
+  const pageFilter = req.query
+
+  if (pageFilter < 1 || typeof(pageFilter) !== "number" || typeof(pageFilter) === undefined) {
+    return res.status(400).send("Informe uma página válida!")
+  }
+
+  if (!pageFilter) {
+
+    const i = 0
+
+    const newTweets = []
+
+    const tenLastTweets = tweets.slice(-10)
+
+    if (tenLastTweets.length === 0) return res.send([])
+
+    for (let i = 0; i < tenLastTweets.length; i++) {
+
+      const singleUser = users.find(user => user.username === tenLastTweets[i].username)
+        
+      const tweet = {
+        username: tenLastTweets[i].username,
+        avatar: singleUser.avatar,
+        tweet: tenLastTweets[i].tweet
+      }
+
+      newTweets.push(tweet)
+
+    }
+    return res.send(newTweets)
+  }
+
+    const newTweets = []
+
+    const tenLastTweets = tweets.slice(-10)
+
+    if (tenLastTweets.length === 0) return res.send([])
+
+    for (let i = pageFilter * 10; i < tenLastTweets.length; i++) {
+
+      const singleUser = users.find(user => user.username === tenLastTweets[i].username)
+        
+      const tweet = {
+        username: tenLastTweets[i].username,
+        avatar: singleUser.avatar,
+        tweet: tenLastTweets[i].tweet
+      }
+
+      newTweets.push(tweet)
+
+    }
+    return res.send(newTweets)
+
+  // if pageFilter = 1 => i = 0
+  // if pageFilter = 2 => i = 10
+  // if pageFilter = 3 => i = 20
+  // if pageFilter = 4 => i = 30
+
+})

@@ -67,6 +67,7 @@ app.get("/tweets", (req, res) => {
 
   }
   res.send(newTweets)
+
 })
 
 app.get("/tweets/:username", (req, res) => {
